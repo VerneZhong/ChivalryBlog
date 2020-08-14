@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>dubbo-demo-api-provider</artifactId>
+    <description>Dubbo Provider Project</description>
 
     <properties>
         <skip_maven_deploy>true</skip_maven_deploy>

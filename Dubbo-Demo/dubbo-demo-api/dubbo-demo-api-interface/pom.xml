@@ -12,5 +12,6 @@
     <artifactId>dubbo-demo-api-interface</artifactId>
     <groupId>com.chivalry.dubbo</groupId>
     <version>${project.parent.version}</version>
+    <description>Dubbo Demo Api</description>
 
 </project>
