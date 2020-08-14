@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 option java_multiple_files = true;
-option java_package = "com.chivalry.grpc.examples";
+option java_package = "com.chivalry.grpc.examples.hello";
 option java_outer_classname = "HelloWorldProto";
 
 package examples;

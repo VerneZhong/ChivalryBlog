@@ -1,8 +1,8 @@
 package com.chivalry.grpc.examples.hello;
 
-import com.chivalry.grpc.examples.HelloReply;
-import com.chivalry.grpc.examples.HelloRequest;
-import com.chivalry.grpc.examples.HelloWorldGrpc;
+import com.chivalry.grpc.examples.hello.HelloReply;
+import com.chivalry.grpc.examples.hello.HelloRequest;
+import com.chivalry.grpc.examples.hello.HelloWorldGrpc;
 import io.grpc.Channel;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
