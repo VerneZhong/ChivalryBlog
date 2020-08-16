@@ -13,6 +13,7 @@
         <module>Java-SPI-Demo</module>
         <module>Dubbo-Demo</module>
         <module>Java-Design-Patterns</module>
+        <module>Spring-Trascation</module>
     </modules>
 
     <properties>
