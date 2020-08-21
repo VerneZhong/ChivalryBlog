@@ -24,18 +24,29 @@ public class BubbleSort {
         System.out.println(Arrays.toString(array));
     }
 
-    public static void sort(int[] array) {
+    private static void sort(int[] array) {
         for (int i = 0; i < array.length; i++) {
-            for (int j = 0; j < array.length - 1; j++) {
-                if (array[j] > array[j + 1]) {
-                    int temp = array[j];
-                    array[j] = array[j + 1];
-                    array[j + 1] = temp;
+            for (int i1 = 0; i1 < array.length - 1; i1++) {
+                if (array[i1] < array[i1 + 1]) {
+                    int temp = array[i1 + 1];
+                    array[i1 + 1] = array[i];
+                    array[i] = temp;
                 }
             }
         }
     }
 
+//    public static void sort(int[] array) {
+//        for (int i = 0; i < array.length; i++) {
+//            for (int j = 0; j < array.length - 1; j++) {
+//                if (array[j] > array[j + 1]) {
+//                    int temp = array[j];
+//                    array[j] = array[j + 1];
+//                    array[j + 1] = temp;
+//                }
+//            }
+//        }
+//    }
 
 
 }
