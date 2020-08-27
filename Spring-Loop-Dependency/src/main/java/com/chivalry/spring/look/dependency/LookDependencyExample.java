@@ -2,6 +2,7 @@ package com.chivalry.spring.look.dependency;
 
 import com.chivalry.spring.look.dependency.domain.User;
 import com.chivalry.spring.look.dependency.domain.UserHolder;
+import com.chivalry.spring.look.dependency.domain.UserProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -62,6 +63,14 @@ public class LookDependencyExample {
         return userHolder;
     }
 
+    @Bean(initMethod = "init", destroyMethod = "destroy")
+    public UserProcessor userProcessor() {
+        UserProcessor userProcessor = new UserProcessor();
+        userProcessor.setId(1L);
+        userProcessor.setName("zxb");
+        return userProcessor;
+    }
+
     public static void main(String[] args) {
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
 
@@ -74,11 +83,14 @@ public class LookDependencyExample {
 //        System.out.println(user.user);
 //        System.out.println(user.userHolder);
 
-        UserHolder userHolder = applicationContext.getBean(UserHolder.class);
-        System.out.println(userHolder);
+//        UserHolder userHolder = applicationContext.getBean(UserHolder.class);
+//        System.out.println(userHolder);
 
-        User user = applicationContext.getBean(User.class);
-        System.out.println(user);
+//        User user = applicationContext.getBean(User.class);
+//        System.out.println(user);
+
+        UserProcessor userProcessor = applicationContext.getBean(UserProcessor.class);
+        System.out.println(userProcessor);
 
         applicationContext.close();
     }

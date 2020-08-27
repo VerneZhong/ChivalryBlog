@@ -19,6 +19,7 @@
         <module>Spring-Loop-Dependency</module>
         <module>Spring-Boot-Examples</module>
         <module>Algorithm-Demo</module>
+        <module>Java-Basics-Demo</module>
     </modules>
 
     <properties>
