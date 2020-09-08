@@ -1,6 +1,7 @@
 package com.chivalry.spring.look.dependency.domain;
 
 import org.springframework.beans.factory.BeanNameAware;
+import org.springframework.beans.factory.DisposableBean;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
