@@ -1,0 +1,2 @@
+com.chivalry.spi.message.EmailServiceProvider
+com.chivalry.spi.message.PushNotificationServiceProvider
