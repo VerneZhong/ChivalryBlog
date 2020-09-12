@@ -8,7 +8,7 @@ package com.chivalry.spi.message;
 public interface MessageServiceProvider {
     /**
      * 发送消息
-     * @param message
+     * @param message 消息
      */
     void sendMessage(String message);
 }
