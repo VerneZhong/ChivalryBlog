@@ -1,9 +1,7 @@
 package com.chivalry.rmi;
 
-import java.rmi.RemoteException;
+import java.io.IOException;
 import java.rmi.registry.LocateRegistry;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.locks.LockSupport;
 
 /**
  * 注册中心的实现
@@ -17,8 +15,9 @@ public class RegistryServer {
         try {
             LocateRegistry.createRegistry(8000);
             System.out.println("registry start...");
-            LockSupport.park();
-        } catch (RemoteException e) {
+            // 阻塞 RegistryServer
+            System.in.read();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

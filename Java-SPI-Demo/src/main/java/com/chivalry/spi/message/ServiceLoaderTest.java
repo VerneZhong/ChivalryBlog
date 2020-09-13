@@ -18,13 +18,13 @@ public class ServiceLoaderTest {
         }
 
         // 使用 Java 8 Optional 获取第一个 service，注意：findFirst()方法是JDK9版本提供的方法
-        Optional<MessageServiceProvider> firstService = serviceProviders.findFirst();
-        firstService.ifPresent(messageServiceProvider -> messageServiceProvider.sendMessage("Hello Friend"));
+//        Optional<MessageServiceProvider> firstService = serviceProviders.findFirst();
+//        firstService.ifPresent(messageServiceProvider -> messageServiceProvider.sendMessage("Hello Friend"));
 
         // 使用 Java 8 forEach() 方法
         serviceProviders.forEach((service) -> service.sendMessage("Have a Nice Day!"));
 
         // 已加载服务总数
-        System.out.println(serviceProviders.stream().count());
+//        System.out.println(serviceProviders.stream().count());
     }
 }
