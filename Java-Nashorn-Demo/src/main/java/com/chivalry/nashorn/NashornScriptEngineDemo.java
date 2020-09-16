@@ -61,7 +61,10 @@ public class NashornScriptEngineDemo {
         for (int i = 0; i < count; i++) {
             monitor.incrementAndGet();
             NashornScriptEngineDemo.execute("nashorn");
+//            FileReader fileReader = new FileReader(PATH);
+//            NashornScriptEngineDemo.execute(fileReader, "Hello Nashorn.");
         }
         System.out.println(monitor.get() + "次，共 cost: " + (System.currentTimeMillis() - start) + " ms");
+        System.in.read();
     }
 }
