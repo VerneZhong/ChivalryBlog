@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.facebook.presto.sql.parser.ParsingOptions;
 import com.facebook.presto.sql.parser.SqlParser;
 import com.facebook.presto.sql.tree.*;
 
@@ -16,36 +15,44 @@ import java.util.List;
  * @date 2020-09-17 22:04:36
  */
 public class SelectEngine extends AstVisitor<String, JSONContext> {
-    private static final SqlParser PARSER = new SqlParser();
-    private final Statement statement;
-    private final String sql;
+    private static SqlParser parser = new SqlParser();
+
+    private Statement statement;
+    private String sql;
 
     public SelectEngine(String sql) {
         this.sql = sql;
-        this.statement = PARSER.createStatement(sql, ParsingOptions.builder().build());
+        statement = parser.createStatement(sql);
     }
 
-    public String getSql() {
+    public String sql(){
         return sql;
     }
 
-    public String select(String topic, String jsonArr) {
-        return this.process(statement, new JSONContext(topic, jsonArr));
+    public String select(String topic, String jsonarr) {
+        return this.process(statement, new JSONContext(topic, jsonarr));
     }
 
-    public static String select(String sql, String topic, String jsonArr) {
+    public static String select(String sql, String topic, String jsonarr) {
         SelectEngine engine = new SelectEngine(sql);
-        return engine.process(engine.statement, new JSONContext(topic, jsonArr));
+        return engine.process(engine.statement, new JSONContext(topic, jsonarr));
     }
 
     @Override
     protected String visitQuerySpecification(QuerySpecification node, JSONContext context) {
-        List<Object> result = context.getJSONArray();
-        if (node.getWhere().isPresent()) {
+        List<Object> result = context.getJSONArray();// = new ArrayList<JSONObject>();
+        if( node.getWhere().isPresent() ){
             // where
-            result.removeIf(next -> !SelectVisitor.where(node.getWhere().get(), context.setRowJSON((JSONObject) next)));
+            Iterator<Object> index = result.iterator();
+            for( ; index.hasNext(); ){
+                Object row = index.next();
+                if( !SelectVisitor.where(node.getWhere().get(), context.setRowJSON((JSONObject)row)) ){
+                    index.remove();
+                }
+            }
         }
-        if (node.getOrderBy().isPresent()) {
+
+        if( node.getOrderBy().isPresent() ){
             result.sort((left, right) -> {
                 int compareRet = 0;
                 for (SortItem sort : node.getOrderBy().get().getSortItems()) {
@@ -78,8 +85,9 @@ public class SelectEngine extends AstVisitor<String, JSONContext> {
                 return compareRet;
             });
         }
-        if (!(node.getSelect().getSelectItems().size() == 1
-                && node.getSelect().getSelectItems().get(0) instanceof AllColumns)) {
+
+        if ( !(node.getSelect().getSelectItems().size() == 1
+                && node.getSelect().getSelectItems().get(0) instanceof AllColumns) ){
             result = new JSONArray();
             for (Object obj : context.getJSONArray()) {
                 JSONObject selRet = new JSONObject();
@@ -92,14 +100,13 @@ public class SelectEngine extends AstVisitor<String, JSONContext> {
                         selRet.put(
                                 scolumn.getAlias().isPresent() ? scolumn.getAlias().get().getValue()
                                         : scolumn.getExpression().toString(),
-                                SelectVisitor.valueOf(scolumn.getExpression(), context.setRowJSON(row)));
+                                SelectVisitor.valueOf(scolumn.getExpression(), context.setRowJSON(row)) );
                     }
                 }
                 result.add(selRet);
                 // 已经有Function处理了所有JSONArray数据。不再继续执行
-                if (context.isDone()) {
+                if (context.isDone())
                     break;
-                }
             }
         }
 
@@ -116,7 +123,6 @@ public class SelectEngine extends AstVisitor<String, JSONContext> {
             }
             result = result.subList(offset, rows);
         }
-
 
         return JSON.toJSONString(result, SerializerFeature.WriteMapNullValue);
     }

@@ -19,7 +19,7 @@ public class JSONContext {
         return topic;
     }
 
-    public JSONContext(String topic, String data){
+    public JSONContext( String topic, String data){
         this.topic = topic;
         jsonData = data;
         //jsondb = JSON.parseArray(data);

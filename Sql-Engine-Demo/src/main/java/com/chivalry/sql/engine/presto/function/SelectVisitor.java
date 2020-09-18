@@ -31,11 +31,30 @@ public class SelectVisitor extends AstVisitor<Object, JSONContext> {
         if (function.isProcessAll()) {
             context.done();
         }
-        List<Object> args = new ArrayList<>();
-        for (Expression argument : node.getArguments()) {
-            args.add(this.process(argument, context));
+        /* generate params array here */
+        Object[] argsArray = generateParamsArray(function.getParamFrom(), context, node.getArguments());
+        return function.invoke(argsArray);
+    }
+
+    public Object[] generateParamsArray(ParameterFrom paramFrom, JSONContext context, List<Expression> expressionList) {
+        Object[] argsArray = null;
+        try {
+            switch (paramFrom) {
+                case NONE:
+                    argsArray = null;
+                    break;
+                case RAWJSON:
+                    argsArray = new Object[2];
+                    argsArray[0] = context.getTopic();
+                    argsArray[1] = context.getRawJSON();
+                    break;
+                default:
+                    break;
+            }
+        } catch (Throwable th) {
+            th.printStackTrace();
         }
-        return function.invoke(context, args.toArray());
+        return argsArray;
     }
 
     @Override

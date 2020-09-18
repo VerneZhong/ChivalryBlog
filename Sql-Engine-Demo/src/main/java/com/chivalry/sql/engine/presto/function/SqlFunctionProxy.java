@@ -19,7 +19,7 @@ public class SqlFunctionProxy {
 
     static {
         try {
-            Set<ClassInfo> classes = ClassPath.from(Thread.currentThread().getContextClassLoader()).getTopLevelClassesRecursive("com.chivalry");
+            Set<ClassInfo> classes = ClassPath.from(Thread.currentThread().getContextClassLoader()).getTopLevelClassesRecursive("com.chivalry.sql.engine");
             classes.forEach(classInfo -> {
                 Method[] methods = classInfo.load().getMethods();
                 for (Method method : methods) {
@@ -38,12 +38,5 @@ public class SqlFunctionProxy {
 
     public static Function getFunction(String name) {
         return sqlFunctionMap.get(name);
-    }
-
-    public static Object invoke(String functionName, JSONContext context, Object... objects) {
-        if (!sqlFunctionMap.containsKey(functionName)) {
-            return null;
-        }
-        return sqlFunctionMap.get(functionName).invoke(context, objects);
     }
 }

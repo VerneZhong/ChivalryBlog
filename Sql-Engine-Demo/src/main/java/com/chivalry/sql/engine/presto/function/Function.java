@@ -1,28 +1,35 @@
 package com.chivalry.sql.engine.presto.function;
 
-import java.lang.reflect.InvocationTargetException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.lang.reflect.Method;
-import java.util.Arrays;
 
 /**
  * @author Mr.zxb
  * @date 2020-09-17 22:21:31
  */
 public class Function {
-    private ParameterFrom parameterFrom;
+    private static Logger LOG = LoggerFactory.getLogger(Function.class);
+    private ParameterFrom paramFrom;
     private Method method;
 
-    private Function(ParameterFrom parameterFrom, Method method) {
-        this.parameterFrom = parameterFrom;
+    public static Function of(ParameterFrom paramFrom, Method method) {
+        return new Function(paramFrom, method);
+    }
+
+    private Function(ParameterFrom paramFrom, Method method) {
+        this.paramFrom = paramFrom;
         this.method = method;
     }
 
-    public static Function of(ParameterFrom parameterFrom, Method method) {
-        return new Function(parameterFrom, method);
+    public ParameterFrom getParamFrom() {
+        return paramFrom;
     }
 
+    // 判断本Function是否处理了所有JSONArray数据
     public boolean isProcessAll() {
-        switch (parameterFrom) {
+        switch (paramFrom) {
             case RAWJSON:
                 return true;
             default:
@@ -30,26 +37,13 @@ public class Function {
         }
     }
 
-    public Object invoke(JSONContext context, Object... args) {
+    public Object invoke(Object[] args) {
         try {
-            switch (parameterFrom) {
-                case NONE:
-                    return method.invoke(null, null);
-                case RAWJSON:
-                    return method.invoke(null, context.getRawJSON());
-                default:
-                    return null;
-            }
-        } catch (IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
+            return method.invoke(null, args);
+        } catch (Throwable thx) {
+            thx.printStackTrace();
         }
         return null;
-    }
-
-    private Object[] arrayAppend(Object[] original, Object object) {
-        original = Arrays.copyOf(original, original.length + 1);
-        original[original.length - 1] = object;
-        return original;
     }
 
 }
