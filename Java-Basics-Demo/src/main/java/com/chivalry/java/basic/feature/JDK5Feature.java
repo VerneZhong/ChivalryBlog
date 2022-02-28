@@ -1,16 +1,8 @@
 package com.chivalry.java.basic.feature;
 
-import jdk.internal.util.xml.PropertiesDefaultHandler;
-
-import java.beans.IntrospectionException;
-import java.beans.PropertyDescriptor;
-import java.io.IOException;
 import java.lang.management.GarbageCollectorMXBean;
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryMXBean;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.List;
 
 import static java.util.Arrays.asList;
