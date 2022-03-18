@@ -12,10 +12,10 @@ public class MainTest {
         };
 
         abstractTest.init();
-        abstractTest.test();
+//        abstractTest.test();
 
         AbstractTest child = new AbstractTestChild();
         child.init();
-        child.test();
+//        child.test();
     }
 }
