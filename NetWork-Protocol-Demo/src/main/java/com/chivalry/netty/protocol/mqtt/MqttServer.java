@@ -22,7 +22,7 @@ public class MqttServer {
 
     public static final int MQTT_PORT = 8000;
 
-    private ServerBootstrap bootstrap;
+    private final ServerBootstrap bootstrap;
 
     public MqttServer() {
         bossGroup = new NioEventLoopGroup(1);
