@@ -1,6 +1,5 @@
 package com.chivalry.algorithm.thread;
 
-import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -17,24 +16,25 @@ public class FooTest {
 
         threadPool.execute(() -> {
             try {
+                foo.second(() -> System.out.println("second"));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        threadPool.execute(() -> {
+            try {
+                foo.third(() -> System.out.println("thrid"));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        threadPool.execute(() -> {
+            try {
                 foo.first(() -> System.out.println("first"));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         });
-        threadPool.execute(() -> {
-            try {
-                foo.first(() -> System.out.println("second"));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
-        threadPool.execute(() -> {
-            try {
-                foo.first(() -> System.out.println("thrid"));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
+        threadPool.shutdown();
     }
 }
