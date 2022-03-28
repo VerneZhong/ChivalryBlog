@@ -12,6 +12,6 @@ public class SafeThreadTest {
     }
 
     public synchronized void bar() {
-        // do some more
+        // do some more queue queen
     }
 }

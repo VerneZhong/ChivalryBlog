@@ -1,4 +1,4 @@
-package com.chivalry.java.concurrent.framework.locks;
+package com.chivalry.java.concurrent.framework.daemon;
 
 import java.util.concurrent.TimeUnit;
 

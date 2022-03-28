@@ -1,4 +1,4 @@
-package com.chivalry.java.concurrent.framework.locks;
+package com.chivalry.java.concurrent.framework.atomic;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

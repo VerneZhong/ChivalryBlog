@@ -1,4 +1,4 @@
-package com.chivalry.java.concurrent.framework.locks;
+package com.chivalry.java.concurrent.framework.thread;
 
 import java.util.ArrayList;
 import java.util.List;
