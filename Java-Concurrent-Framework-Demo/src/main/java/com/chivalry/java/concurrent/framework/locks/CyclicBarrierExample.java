@@ -26,10 +26,11 @@ public class CyclicBarrierExample {
             int num = i;
             executorService.execute(() -> {
                 try {
-                    // 模拟业务请求
-                    test(num);
+                    System.out.printf("[%s] thread arrived here\n", Thread.currentThread().getName());
                     // 线程达到屏障
                     cyclicBarrier.await();
+                    // 模拟业务请求
+                    test(num);
                 } catch (InterruptedException | BrokenBarrierException e) {
                     e.printStackTrace();
                 }
