@@ -1,5 +1,6 @@
 package com.chivalry.spring.boot.examples;
 
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
