@@ -16,8 +16,11 @@ public class Solution {
 //        int[] nums = {0, 1, 2, 2, 3, 0, 4, 2};
 //        System.out.println(solution.removeElement(nums, 2));
 
-        String haystack = "leetcode", needle = "leeto";
-        System.out.println(solution.strStr(haystack, needle));
+//        String haystack = "leetcode", needle = "leeto";
+//        System.out.println(solution.strStr(haystack, needle));
+
+        String s = "   fly me   to   the moon  ";
+        System.out.println(solution.lengthOfLastWord(s));
     }
 
     /**
@@ -123,6 +126,9 @@ public class Solution {
 
     /**
      * Roman to Integer
+     * Input: s = "III"
+     * Output: 3
+     * Explanation: III = 3.
      *
      * @param s
      * @return
@@ -151,6 +157,10 @@ public class Solution {
 
     /**
      * Remove Duplicates from Sorted Array
+     * Input: nums = [1,1,2]
+     * Output: 2, nums = [1,2,_]
+     * Explanation: Your function should return k = 2, with the first two elements of nums being 1 and 2 respectively.
+     * It does not matter what you leave beyond the returned k (hence they are underscores).
      *
      * @param nums
      * @return
@@ -171,6 +181,11 @@ public class Solution {
 
     /**
      * remove element
+     * Input: nums = [3,2,2,3], val = 3
+     * Output: 2, nums = [2,2,_,_]
+     * Explanation: Your function should return k = 2, with the first two elements of nums being 2.
+     * It does not matter what you leave beyond the returned k (hence they are underscores).
+     *
      * @param nums
      * @param val
      * @return
@@ -191,6 +206,11 @@ public class Solution {
 
     /**
      * 查找字符串中第一次出现的索引
+     * Input: haystack = "sadbutsad", needle = "sad"
+     * Output: 0
+     * Explanation: "sad" occurs at index 0 and 6.
+     * The first occurrence is at index 0, so we return 0.
+     *
      * @param haystack
      * @param needle
      * @return
@@ -204,6 +224,9 @@ public class Solution {
 
     /**
      * 搜索插入位置
+     * Input: nums = [1,3,5,6], target = 5
+     * Output: 2
+     *
      * @param nums
      * @param target
      * @return
@@ -224,4 +247,57 @@ public class Solution {
         }
         return index;
     }
+
+    /**
+     * 最后一个字的长度
+     * Input: s = "Hello World"
+     * Output: 5
+     * Explanation: The last word is "World" with length 5.
+     *
+     * @param s
+     * @return
+     */
+    public int lengthOfLastWord(String s) {
+        if (s == null) {
+            return 0;
+        }
+        int length = 0;
+        s = s.trim();
+        for (int i = s.length() - 1; i >= 0; i--) {
+            char ch = s.charAt(i);
+            if (Character.isSpaceChar(ch)) {
+                break;
+            }
+            length++;
+        }
+        return length;
+    }
+
+    /**
+     * Plus One
+     * Input: digits = [1,2,3]
+     * Output: [1,2,4]
+     * Explanation: The array represents the integer 123.
+     * Incrementing by one gives 123 + 1 = 124.
+     * Thus, the result should be [1,2,4].
+     *
+     * @param digits
+     * @return
+     */
+    public int[] plusOne(int[] digits) {
+        int carry = 1;
+        for (int i = digits.length - 1; i >= 0; i--) {
+            int sum = digits[i] + carry;
+            digits[i] = sum % 10;
+            carry = sum / 10;
+        }
+        if (carry > 0) {
+            int[] result = new int[digits.length + 1];
+            result[0] = carry;
+            System.arraycopy(digits, 0, result, 1, digits.length);
+            return result;
+        }
+        return digits;
+    }
+
 }
