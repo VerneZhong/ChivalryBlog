@@ -13,8 +13,11 @@ public class Solution {
 //        System.out.println(solution.checkRecord("PPALLL"));
 //        System.out.println(solution.romanToInt("MCMXCIV"));
 
-        int[] array = {0,0,1,1,1,2,2,3,3,4};
-        System.out.println(solution.removeDuplicates(array));
+//        int[] nums = {0, 1, 2, 2, 3, 0, 4, 2};
+//        System.out.println(solution.removeElement(nums, 2));
+
+        String haystack = "leetcode", needle = "leeto";
+        System.out.println(solution.strStr(haystack, needle));
     }
 
     /**
@@ -120,6 +123,7 @@ public class Solution {
 
     /**
      * Roman to Integer
+     *
      * @param s
      * @return
      */
@@ -147,6 +151,7 @@ public class Solution {
 
     /**
      * Remove Duplicates from Sorted Array
+     *
      * @param nums
      * @return
      */
@@ -162,5 +167,61 @@ public class Solution {
             }
         }
         return slow + 1;
+    }
+
+    /**
+     * remove element
+     * @param nums
+     * @param val
+     * @return
+     */
+    public int removeElement(int[] nums, int val) {
+        if (nums.length == 0) {
+            return 0;
+        }
+        int slow = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != val) {
+                nums[slow] = nums[i];
+                slow++;
+            }
+        }
+        return slow;
+    }
+
+    /**
+     * 查找字符串中第一次出现的索引
+     * @param haystack
+     * @param needle
+     * @return
+     */
+    public int strStr(String haystack, String needle) {
+        if (haystack == null) {
+            return -1;
+        }
+        return haystack.indexOf(needle);
+    }
+
+    /**
+     * 搜索插入位置
+     * @param nums
+     * @param target
+     * @return
+     */
+    public int searchInsert(int[] nums, int target) {
+        if (nums.length == 0) {
+            return 0;
+        }
+        int index = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == target) {
+                index = i;
+                break;
+            }
+            if (nums[i] < target) {
+                index++;
+            }
+        }
+        return index;
     }
 }
