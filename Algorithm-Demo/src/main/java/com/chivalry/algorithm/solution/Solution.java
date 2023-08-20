@@ -1,8 +1,6 @@
 package com.chivalry.algorithm.solution;
 
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.List;
 
 /**
  * @author Mr.zxb
