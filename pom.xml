@@ -24,6 +24,7 @@
         <module>Java-Concurrent-Framework-Demo</module>
         <module>NetWork-Protocol-Demo</module>
         <module>Sql-Engine-Demo</module>
+        <module>SpringBoot-Kafka-Demo</module>
     </modules>
 
     <properties>
