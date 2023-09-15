@@ -19,8 +19,11 @@ public class Solution {
 //        String haystack = "leetcode", needle = "leeto";
 //        System.out.println(solution.strStr(haystack, needle));
 
-        String s = "   fly me   to   the moon  ";
-        System.out.println(solution.lengthOfLastWord(s));
+//        String s = "   fly me   to   the moon  ";
+//        System.out.println(solution.lengthOfLastWord(s));
+
+        String a = "1010", b = "1011";
+        System.out.println(solution.addBinary(a, b));
     }
 
     /**
@@ -298,6 +301,103 @@ public class Solution {
             return result;
         }
         return digits;
+    }
+
+    /**
+     * Given two binary strings a and b, return their sum as a binary string.
+     * Example 1:
+     * Input: a = "11", b = "1"
+     * Output: "100"
+     *
+     * Example 2:
+     * Input: a = "1010", b = "1011"
+     * Output: "10101"
+     * @param a
+     * @param b
+     * @return
+     */
+    public String addBinary(String a, String b) {
+        StringBuilder result = new StringBuilder();
+        int carry = 0; // 繰り上げを保持する変数
+
+        int i = a.length() - 1;
+        int j = b.length() - 1;
+
+        // 逆順に2つの文字列をスキャンしていく
+        while (i >= 0 || j >= 0) {
+            int sum = carry;
+
+            if (i >= 0) {
+                sum += a.charAt(i) - '0'; // 文字を数字に変換
+                i--;
+            }
+
+            if (j >= 0) {
+                sum += b.charAt(j) - '0';
+                j--;
+            }
+
+            // 2進数の場合、sumが2以上の場合に繰り上げが発生する
+            carry = sum / 2;
+            result.insert(0, sum % 2); // 結果の先頭に加算結果を追加
+        }
+
+        // 最終的な繰り上げがある場合、結果に追加
+        if (carry > 0) {
+            result.insert(0, carry);
+        }
+
+        return result.toString();
+    }
+
+    /**
+     * Given a non-negative integer x, return the square root of x rounded down to the nearest integer.
+     * The returned integer should be non-negative as well.
+     * You must not use any built-in exponent function or operator.
+     * For example, do not use pow(x, 0.5) in c++ or x ** 0.5 in python.
+     * @param x
+     * @return
+     */
+    public int mySqrt(int x) {
+        if (x == 0) {
+            return 0;
+        }
+
+        int start = 1;
+        int end = x;
+        while (start < end) {
+            int mid = start + (end - start) / 2;
+            // found the result
+            if (mid <= x / mid && (mid + 1) > x / (mid + 1)) {
+                return mid;
+            } else if (mid < x / mid) {
+                // check the right part
+                start = mid + 1;
+            } else {
+                // check the left part
+                end = mid;
+            }
+        }
+        return start;
+    }
+
+    /**
+     * You are climbing a staircase. It takes n steps to reach the top.
+     * Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+     * @param n
+     * @return
+     */
+    public int climbStairs(int n) {
+        if (n <= 1) {
+            return n;
+        }
+        int a = 1, b = 2;
+        for (int i = 1; i < n; i++) {
+            int temp = b;
+            b = a + b;
+            a = temp;
+        }
+        return a;
     }
 
 }
