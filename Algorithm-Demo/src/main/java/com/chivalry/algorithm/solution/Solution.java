@@ -1,5 +1,6 @@
 package com.chivalry.algorithm.solution;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -308,10 +309,11 @@ public class Solution {
      * Example 1:
      * Input: a = "11", b = "1"
      * Output: "100"
-     *
+     * <p>
      * Example 2:
      * Input: a = "1010", b = "1011"
      * Output: "10101"
+     *
      * @param a
      * @param b
      * @return
@@ -355,6 +357,7 @@ public class Solution {
      * The returned integer should be non-negative as well.
      * You must not use any built-in exponent function or operator.
      * For example, do not use pow(x, 0.5) in c++ or x ** 0.5 in python.
+     *
      * @param x
      * @return
      */
@@ -384,6 +387,7 @@ public class Solution {
     /**
      * You are climbing a staircase. It takes n steps to reach the top.
      * Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+     *
      * @param n
      * @return
      */
@@ -398,6 +402,165 @@ public class Solution {
             a = temp;
         }
         return a;
+    }
+
+    /**
+     * Given the head of a sorted linked list, delete all duplicates such that each element appears only once.
+     * Return the linked list sorted as well.
+     *
+     * @param head
+     * @return
+     */
+    public ListNode deleteDuplicates(ListNode head) {
+        ListNode current = head;
+        while (current != null && current.next != null) {
+            if (current.next.val == current.val) {
+                current.next = current.next.next;
+            } else {
+                current = current.next;
+            }
+        }
+        return head;
+    }
+
+    /**
+     * You are given two integer arrays nums1 and nums2, sorted in non-decreasing order, and two integers m and n,
+     * representing the number of elements in nums1 and nums2 respectively.
+     * <p>
+     * Merge nums1 and nums2 into a single array sorted in non-decreasing order.
+     * <p>
+     * The final sorted array should not be returned by the function, but instead be stored inside the array nums1.
+     * To accommodate this, nums1 has a length of m + n,
+     * where the first m elements denote the elements that should be merged,
+     * and the last n elements are set to 0 and should be ignored.
+     * nums2 has a length of n.
+     *
+     * @param nums1
+     * @param m
+     * @param nums2
+     * @param n
+     */
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        // Start from the end of nums1 and nums2
+        int i = m - 1;
+        int j = n - 1;
+        int k = m + n - 1;
+
+        // Merge nums2 into nums1
+        while (j >= 0) {
+            if (i >= 0 && nums1[i] > nums2[j]) {
+                nums1[k--] = nums1[i--];
+            } else {
+                nums1[k--] = nums2[j--];
+            }
+        }
+    }
+
+    /**
+     * Given the root of a binary tree, return the inorder traversal of its nodes' values.
+     * @param root
+     * @return
+     */
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        helper(root, res);
+        return res;
+    }
+
+    public void helper(TreeNode root, List<Integer> res) {
+        if (root != null) {
+            if (root.left != null) {
+                helper(root.left, res);
+            }
+            res.add(root.val);
+            if (root.right != null) {
+                helper(root.right, res);
+            }
+        }
+    }
+
+    /**
+     * Given the roots of two binary trees p and q,
+     * write a function to check if they are the same or not.
+     * Two binary trees are considered the same if they are structurally identical,
+     * and the nodes have the same value.
+     * @param p
+     * @param q
+     * @return
+     */
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        // Both trees are null
+        if (p == null && q == null) {
+            return true;
+        }
+        // One of p and q is null
+        if (q == null || p == null) {
+            return false;
+        }
+        if (p.val != q.val) {
+            return false;
+        }
+        return isSameTree(p.right, q.right) &&
+                isSameTree(p.left, q.left);
+    }
+
+    /**
+     * Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).
+     * @param root
+     * @return
+     */
+    public boolean isSymmetric(TreeNode root) {
+        return root == null || isMirror(root.left, root.right);
+    }
+
+    private boolean isMirror(TreeNode t1, TreeNode t2) {
+        if (t1 == null && t2 == null) {
+            return true;
+        }
+        if (t1 == null || t2 == null) {
+            return false;
+        }
+        return (t1.val == t2.val)
+                && isMirror(t1.right, t2.left)
+                && isMirror(t1.left, t2.right);
+    }
+
+    /**
+     * Implement the myAtoi(string s) function,
+     * which converts a string to a 32-bit signed integer (similar to C/C++'s atoi function).
+     * @param s
+     * @return
+     */
+    public int myAtoi(String s) {
+        s = s.trim(); // Step 1: Ignore leading whitespace
+
+        if (s.length() == 0) {
+            return 0;
+        }
+
+        int sign = 1;
+        int i = 0;
+
+        // Step 2: Check for the sign
+        if (s.charAt(i) == '-' || s.charAt(i) == '+') {
+            if (s.charAt(i) == '-') {
+                sign = -1;
+            }
+            i++;
+        }
+
+        // Step 3 and 4: Read in next the characters until the next non-digit charcter or the end of the input is reached
+        int n = 0;
+        while (i < s.length() && Character.isDigit(s.charAt(i))) {
+            int digit = s.charAt(i) - '0';
+            if (n > (Integer.MAX_VALUE - digit) / 10) { // checking for overflow
+                return sign == -1 ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+            }
+            n = n * 10 + digit;
+            i++;
+        }
+
+        return sign * n; // Step 5 and 6: Apply the sign and return result
     }
 
 }
