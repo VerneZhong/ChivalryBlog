@@ -563,4 +563,99 @@ public class Solution {
         return sign * n; // Step 5 and 6: Apply the sign and return result
     }
 
+    /**
+     * Convert Sorted Array to Binary Search Tree
+     * Given an integer array nums where the elements are sorted in ascending order, convert it to a
+     * height-balanced
+     *  binary search tree.
+     * @param nums
+     * @return
+     */
+    public TreeNode sortedArrayToBST(int[] nums) {
+        return sortedArrayToBSTUtil(nums, 0, nums.length - 1);
+    }
+
+    private TreeNode sortedArrayToBSTUtil(int[] nums, int start, int end) {
+        if (start > end) {
+            return null;
+        }
+        int mid = (start + end) / 2;
+        TreeNode root = new TreeNode(nums[mid]);
+        root.left = sortedArrayToBSTUtil(nums, start, mid - 1);
+        root.right = sortedArrayToBSTUtil(nums, mid + 1, end);
+        return root;
+    }
+
+    /**
+     * Balanced Binary Tree
+     * Given a binary tree, determine if it is
+     * height-balanced
+     * .
+     * @param root
+     * @return
+     */
+    public boolean isBalanced(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        int left = getHeight(root.left);
+        int right = getHeight(root.right);
+        if (Math.abs(left - right) > 1) {
+            return false;
+        }
+        return isBalanced(root.left) && isBalanced(root.right);
+    }
+
+    private int getHeight(TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+        int left = getHeight(node.left);
+        int right = getHeight(node.right);
+        return Math.max(left, right) + 1;
+    }
+
+    /**
+     * Minimum Depth of Binary Tree
+     * Given a binary tree, find its minimum depth.
+     *
+     * The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.
+     *
+     * Note: A leaf is a node with no children.
+     * @param root
+     * @return
+     */
+    public int minDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        if (root.left == null && root.right == null) {
+            return 1;
+        }
+        int leftDepth = root.left != null ? minDepth(root.left) : Integer.MAX_VALUE;
+        int rightDepth = root.right != null ? minDepth(root.right) : Integer.MAX_VALUE;
+
+        return Math.min(leftDepth, rightDepth) + 1;
+    }
+
+    /**
+     * Path Sum
+     * Given the root of a binary tree and an integer targetSum,
+     * return true if the tree has a root-to-leaf path such that adding up
+     * all the values along the path equals targetSum.
+     *
+     * A leaf is a node with no children.
+     * @param root
+     * @param targetSum
+     * @return
+     */
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+        if (root == null) {
+            return false;
+        }
+        if (root.left == null && root.right == null) {
+            return targetSum == root.val;
+        }
+        return hasPathSum(root.left, targetSum - root.val) || hasPathSum(root.right, targetSum - root.val);
+    }
 }
