@@ -25,7 +25,7 @@ public class Solution {
 //        String a = "1010", b = "1011";
 //        System.out.println(solution.addBinary(a, b));
 
-        int[] nums = {2,7,11,15};
+        int[] nums = {2, 7, 11, 15};
         int[] twoSum = solution.twoSum(nums, 9);
         System.out.println(Arrays.toString(twoSum));
     }
@@ -461,6 +461,7 @@ public class Solution {
 
     /**
      * Given the root of a binary tree, return the inorder traversal of its nodes' values.
+     *
      * @param root
      * @return
      */
@@ -487,6 +488,7 @@ public class Solution {
      * write a function to check if they are the same or not.
      * Two binary trees are considered the same if they are structurally identical,
      * and the nodes have the same value.
+     *
      * @param p
      * @param q
      * @return
@@ -509,6 +511,7 @@ public class Solution {
 
     /**
      * Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).
+     *
      * @param root
      * @return
      */
@@ -531,6 +534,7 @@ public class Solution {
     /**
      * Implement the myAtoi(string s) function,
      * which converts a string to a 32-bit signed integer (similar to C/C++'s atoi function).
+     *
      * @param s
      * @return
      */
@@ -570,7 +574,8 @@ public class Solution {
      * Convert Sorted Array to Binary Search Tree
      * Given an integer array nums where the elements are sorted in ascending order, convert it to a
      * height-balanced
-     *  binary search tree.
+     * binary search tree.
+     *
      * @param nums
      * @return
      */
@@ -594,6 +599,7 @@ public class Solution {
      * Given a binary tree, determine if it is
      * height-balanced
      * .
+     *
      * @param root
      * @return
      */
@@ -621,10 +627,11 @@ public class Solution {
     /**
      * Minimum Depth of Binary Tree
      * Given a binary tree, find its minimum depth.
-     *
+     * <p>
      * The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.
-     *
+     * <p>
      * Note: A leaf is a node with no children.
+     *
      * @param root
      * @return
      */
@@ -646,8 +653,9 @@ public class Solution {
      * Given the root of a binary tree and an integer targetSum,
      * return true if the tree has a root-to-leaf path such that adding up
      * all the values along the path equals targetSum.
-     *
+     * <p>
      * A leaf is a node with no children.
+     *
      * @param root
      * @param targetSum
      * @return
@@ -665,16 +673,17 @@ public class Solution {
     /**
      * Majority Element
      * Given an array nums of size n, return the majority element.
-     *
+     * <p>
      * The majority element is the element that appears more than ⌊n / 2⌋ times.
      * You may assume that the majority element always exists in the array.
      * Example 1:
      * Input: nums = [3,2,3]
      * Output: 3
-     *
+     * <p>
      * Example 2:
      * Input: nums = [2,2,1,1,1,2,2]
      * Output: 2
+     *
      * @param nums
      * @return
      */
@@ -698,24 +707,25 @@ public class Solution {
      * 1. Two Sum
      * Given an array of integers nums and an integer target,
      * return indices of the two numbers such that they add up to target.
-     *
+     * <p>
      * You may assume that each input would have exactly one solution,
      * and you may not use the same element twice.
-     *
+     * <p>
      * You can return the answer in any order.
-     *
+     * <p>
      * Example 1:
      * Input: nums = [2,7,11,15], target = 9
      * Output: [0,1]
      * Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
-     *
+     * <p>
      * Example 2:
      * Input: nums = [3,2,4], target = 6
      * Output: [1,2]
-     *
+     * <p>
      * Example 3:
      * Input: nums = [3,3], target = 6
      * Output: [0,1]
+     *
      * @param nums
      * @param target
      * @return
@@ -724,7 +734,14 @@ public class Solution {
         Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
             int difference = target - nums[i];
+            if (!map.containsKey(difference)) {
+                map.put(nums[i], i);
+            } else {
+                return new int[]{map.get(difference), i};
+            }
         }
         return new int[0];
     }
+
+
 }
