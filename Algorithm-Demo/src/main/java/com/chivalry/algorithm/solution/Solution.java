@@ -25,9 +25,12 @@ public class Solution {
 //        String a = "1010", b = "1011";
 //        System.out.println(solution.addBinary(a, b));
 
-        int[] nums = {2, 7, 11, 15};
-        int[] twoSum = solution.twoSum(nums, 9);
-        System.out.println(Arrays.toString(twoSum));
+//        int[] nums = {2, 7, 11, 15};
+//        int[] twoSum = solution.twoSum(nums, 9);
+//        System.out.println(Arrays.toString(twoSum));
+
+        int x = 12321;
+        System.out.println(solution.isPalindrome(x));
     }
 
     /**
@@ -743,5 +746,32 @@ public class Solution {
         return new int[0];
     }
 
-
+    /**
+     * 9. Palindrome Number
+     * Given an integer x, return true if x is a palindrome, and false otherwise.
+     * 回文数字，就是将这数的位数反转排列得到的“倒序数”或“反序数”和原数一样
+     *
+     * Example 1:
+     * Input: x = 121
+     * Output: true
+     *
+     * Example 2:
+     * Input: x = -121
+     * Output: false
+     * @param x
+     * @return
+     */
+    public boolean isPalindrome(int x) {
+        if (x < 0) {
+            return false;
+        }
+        int original = x;
+        int revered = 0;
+        while (x > 0) {
+            int digital = x % 10;
+            revered = revered * 10 + digital;
+            x /= 10;
+        }
+        return original == revered;
+    }
 }
