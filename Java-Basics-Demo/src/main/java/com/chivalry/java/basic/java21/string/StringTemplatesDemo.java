@@ -2,7 +2,7 @@ package com.chivalry.java.basic.java21.string;
 
 import java.text.MessageFormat;
 
-import static java.lang.StringTemplate.STR;
+//import static java.lang.StringTemplate.STR;
 
 /**
  * 字符串模板
@@ -31,7 +31,8 @@ public class StringTemplatesDemo {
         System.out.println(message);
 
         // Java 使用 String Templates 进行字符串拼接，可以直接在字符串中嵌入表达式
-        message = STR."Greetings \{name}!";
+        // StringTemplates在Java21中是预览功能，默认禁用
+//        message = STR."Greetings \{name}!";
         System.out.println(message);
     }
 }
