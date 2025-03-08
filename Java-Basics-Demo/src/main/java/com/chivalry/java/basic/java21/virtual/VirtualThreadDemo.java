@@ -2,7 +2,6 @@ package com.chivalry.java.basic.java21.virtual;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
-import java.util.concurrent.locks.LockSupport;
 
 /**
  * 虚拟线程示例
