@@ -13,7 +13,7 @@
     <description>Spring 循环依赖示例</description>
 
     <properties>
-        <spring.version>5.2.7.RELEASE</spring.version>
+        <spring.version>6.1.14</spring.version>
     </properties>
 
     <!-- Spring 依赖 -->
