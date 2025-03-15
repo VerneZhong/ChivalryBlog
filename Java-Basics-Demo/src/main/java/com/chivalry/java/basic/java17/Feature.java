@@ -4,6 +4,8 @@ import java.text.NumberFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+import java.util.random.RandomGenerator;
+import java.util.random.RandomGeneratorFactory;
 import java.util.stream.Stream;
 
 /**
@@ -34,6 +36,8 @@ public class Feature {
         feature.testNumberFormat();
 
         feature.testStreamToList();
+
+        feature.testRandom();
     }
 
     /**
@@ -120,5 +124,14 @@ public class Feature {
 
     public void testStreamToList() {
         Stream.of(1, 2, 3, 4, 5, 6).toList().forEach(System.out::println);
+    }
+
+    public void testRandom() {
+        RandomGeneratorFactory<RandomGenerator> generatorFactory = RandomGeneratorFactory.of("L128X256MixRandom");
+        // 使用时间戳作为随机数种子
+        RandomGenerator randomGenerator = generatorFactory.create(System.currentTimeMillis());
+        // 生成一个0-10的随机数
+        int nexted = randomGenerator.nextInt(10);
+        System.out.println(STR."随机数：\{nexted}");
     }
 }
