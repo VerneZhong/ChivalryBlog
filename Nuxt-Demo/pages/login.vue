@@ -2,19 +2,45 @@
 import {ref} from 'vue'
 import {useRouter} from 'vue-router'
 import { useToast } from "vue-toastification"
+import axios from 'axios'
 
 const username = ref('')
 const password = ref('')
 const router = useRouter()
 const toast = useToast()
 
-const login = () => {
-  if (username.value === 'admin' && password.value === '123456') {
-    toast.success("登录成功！🎉", { timeout: 2000 })
-    // 登录成功后跳转到首页
-    setTimeout(() => router.push("/"), 1500)
-  } else {
-    toast.error("用户名或密码错误！🎉", { timeout: 2000 })
+
+// const login = () => {
+//   if (username.value === 'admin' && password.value === '123456') {
+//     toast.success("登录成功！🎉", { timeout: 2000 })
+//     // 登录成功后跳转到首页
+//     setTimeout(() => router.push("/"), 1500)
+//   } else {
+//     toast.error("用户名或密码错误！🎉", { timeout: 2000 })
+//   }
+// }
+
+const login = async () => {
+  try {
+    // 发起登录请求
+    const response = await axios.post('http://127.0.0.1/api/login', {
+      username: username.value,
+      password: password.value
+    })
+
+    // 假设返回数据包含一个 `token` 或 `status` 字段
+    if (response.data.status === 'success') {
+      toast.success("登录成功！🎉", { timeout: 2000 })
+      // 登录成功后存储 token
+      localStorage.setItem('auth_token', response.data.token)
+      // 登录成功后跳转到首页
+      setTimeout(() => router.push("/"), 1500)
+    } else {
+      toast.error("用户名或密码错误！🎉", { timeout: 2000 })
+    }
+  } catch (error) {
+    // 处理请求错误（如网络问题、后端错误等）
+    toast.error("网络错误，请稍后再试！", { timeout: 2000 })
   }
 }
 </script>
