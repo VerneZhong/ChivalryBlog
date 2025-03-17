@@ -21,49 +21,112 @@ const login = () => {
 
 <template>
   <div class="login-container">
-    <h1>登录</h1>
-    <form @submit.prevent="login">
-      <div>
+    <h1 class="title">欢迎登录</h1>
+    <form @submit.prevent="login" class="login-form">
+      <div class="form-group">
         <label for="username">用户名：</label>
-        <input id="username" v-model="username" type="text" required/>
+        <input id="username" v-model="username" type="text" placeholder="请输入用户名" required />
       </div>
-      <div>
+      <div class="form-group">
         <label for="password">密码：</label>
-        <input id="password" v-model="password" type="password" required/>
+        <input id="password" v-model="password" type="password" placeholder="请输入密码" required />
       </div>
-      <button type="submit">登录</button>
+      <button type="submit" class="login-btn">登录</button>
     </form>
   </div>
 </template>
 
 <style scoped>
+/* 背景和页面布局 */
 .login-container {
-  max-width: 300px;
+  max-width: 400px;
   margin: 50px auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+}
+
+.title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #42b883;
+  margin-bottom: 20px;
+}
+
+/* 表单和输入框样式 */
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 5px;
+  display: block;
 }
 
 input {
-  display: block;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
   width: 100%;
-  margin: 5px 0;
-  padding: 8px;
+  outline: none;
+  transition: border-color 0.3s ease;
 }
 
-button {
-  width: 100%;
-  padding: 10px;
+input:focus {
+  border-color: #42b883;
+}
+
+/* 按钮样式 */
+.login-btn {
+  padding: 15px;
+  font-size: 1.2rem;
   background-color: #42b883;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
+.login-btn:hover {
+  background-color: #369d6a;
+  transform: translateY(-2px);
+}
+
+.login-btn:active {
+  transform: translateY(1px);
+}
+
+/* 错误信息 */
 .error {
   color: red;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+  .login-container {
+    padding: 20px;
+    width: 90%;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .login-btn {
+    font-size: 1rem;
+  }
 }
 </style>
