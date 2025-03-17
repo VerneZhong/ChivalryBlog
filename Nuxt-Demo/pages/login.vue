@@ -1,22 +1,20 @@
 <script setup>
 import {ref} from 'vue'
 import {useRouter} from 'vue-router'
-import { useToast } from "@vueuse/core"
+import { useToast } from "vue-toastification"
 
 const username = ref('')
 const password = ref('')
 const router = useRouter()
 const toast = useToast()
-// const alertMessage = useAlert()
 
 const login = () => {
   if (username.value === 'admin' && password.value === '123456') {
-    // alertMessage.value = "登录成功！🎉"
-    toast.add({ title: "登录成功！🎉", timeout: 2000 })
+    toast.success("登录成功！🎉", { timeout: 2000 })
     // 登录成功后跳转到首页
     setTimeout(() => router.push("/"), 1500)
   } else {
-    toast.add({ title: "用户名或密码错误", timeout: 2000 })
+    toast.error("用户名或密码错误！🎉", { timeout: 2000 })
   }
 }
 </script>
@@ -33,7 +31,6 @@ const login = () => {
         <label for="password">密码：</label>
         <input id="password" v-model="password" type="password" required/>
       </div>
-      <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
       <button type="submit">登录</button>
     </form>
   </div>
