@@ -25,6 +25,7 @@
         <module>NetWork-Protocol-Demo</module>
         <module>Sql-Engine-Demo</module>
         <module>SpringBoot-Kafka-Demo</module>
+        <module>SpringFluxDemo</module>
     </modules>
 
     <properties>
