@@ -23,7 +23,7 @@ const toast = useToast()
 const login = async () => {
   try {
     // 发起登录请求
-    const response = await axios.post('http://127.0.0.1/api/login', {
+    const response = await axios.post('http://127.0.0.1:8080/api/login', {
       username: username.value,
       password: password.value
     })

@@ -1,5 +1,6 @@
 package com.chivalry.model;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 /**
@@ -9,6 +10,8 @@ import lombok.Data;
  */
 @Data
 public class LoginRequest {
+    @NotBlank(message = "Password cannot be empty")  // 非空且去除空格
     private String username;
+    @NotBlank(message = "Password cannot be empty")  // 非空且去除空格
     private String password;
 }

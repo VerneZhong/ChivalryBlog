@@ -22,9 +22,9 @@ public class AuthService {
         // 简单的用户名和密码验证
         if ("admin".equals(loginRequest.getUsername()) && "123456".equals(loginRequest.getPassword())) {
             // 生成 JWT token
-            String token = Jwts.builder()
-                    .setSubject(loginRequest.getUsername())
-                    .setExpiration(new Date(System.currentTimeMillis() + 3600000)) // 1小时有效期
+            String token = Jwts.builder().subject(loginRequest.getUsername())
+                    // 1小时有效期
+                    .expiration(new Date(System.currentTimeMillis() + 3600000))
                     .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
                     .compact();
             return Mono.just(token);
