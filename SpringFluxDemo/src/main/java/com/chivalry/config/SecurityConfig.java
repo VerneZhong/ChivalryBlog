@@ -36,15 +36,15 @@ public class SecurityConfig {
                 .build();
     }
 
-    @Bean
-    public MapReactiveUserDetailsService userDetailsService() {
-        UserDetails user = User.withDefaultPasswordEncoder()
-                .username("admin")
-                .password("123456")
-                .roles("USER")
-                .build();
-        return new MapReactiveUserDetailsService(user);
-    }
+//    @Bean
+//    public MapReactiveUserDetailsService userDetailsService() {
+//        UserDetails user = User.withDefaultPasswordEncoder()
+//                .username("admin")
+//                .password("123456")
+//                .roles("USER")
+//                .build();
+//        return new MapReactiveUserDetailsService(user);
+//    }
 
     @Bean
     public CorsWebFilter corsWebFilter() {

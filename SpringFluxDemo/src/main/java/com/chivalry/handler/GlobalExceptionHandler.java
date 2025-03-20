@@ -43,10 +43,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ConstraintViolationException.class)
     public Mono<ResponseEntity<LoginErrorResponse>> handleValidationException(ConstraintViolationException ex) {
         StringBuilder errorMessage = new StringBuilder();
-        ex.getConstraintViolations().forEach(violation -> {
-            errorMessage.append("Field: ").append(violation.getPropertyPath())
-                    .append(" - ").append(violation.getMessage()).append("; ");
-        });
+        ex.getConstraintViolations().forEach(violation -> errorMessage.append("Field: ").append(violation.getPropertyPath())
+                .append(" - ").append(violation.getMessage()).append("; "));
 
         LoginErrorResponse errorResponse = new LoginErrorResponse(
                 HttpStatus.BAD_REQUEST.value(),
