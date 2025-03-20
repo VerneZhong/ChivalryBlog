@@ -1,11 +1,9 @@
 package com.chivalry.util;
 
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
-import javax.crypto.SecretKey;
 
-import javax.crypto.spec.SecretKeySpec;
+import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 

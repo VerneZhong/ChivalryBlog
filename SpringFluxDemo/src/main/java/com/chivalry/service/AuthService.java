@@ -2,12 +2,8 @@ package com.chivalry.service;
 
 import com.chivalry.model.LoginRequest;
 import com.chivalry.util.JwtUtil;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
-
-import java.util.Date;
 
 /**
  * @author verne.zhong
@@ -16,8 +12,6 @@ import java.util.Date;
  */
 @Service
 public class AuthService {
-
-    private static final String SECRET_KEY = "user_secret_key";
 
     public Mono<String> login(LoginRequest loginRequest) {
         // 简单的用户名和密码验证
