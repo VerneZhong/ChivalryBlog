@@ -15,9 +15,10 @@ import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 import java.util.List;
 
 /**
+ * spring security配置类
  * @author verne.zhong
  * @date 2025/03/19
- * @description TODO
+ * @description
  */
 @Configuration
 @EnableWebFluxSecurity

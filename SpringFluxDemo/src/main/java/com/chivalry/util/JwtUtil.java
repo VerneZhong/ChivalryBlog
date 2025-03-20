@@ -8,9 +8,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 /**
+ * jwt token 工具类
  * @author verne.zhong
  * @date 2025/03/20
- * @description TODO
+ * @description
  */
 public class JwtUtil {
     // ✅ 32字节以上的密钥

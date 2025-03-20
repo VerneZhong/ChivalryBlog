@@ -16,15 +16,19 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
 /**
+ * 登陆入口
  * @author verne.zhong
  * @date 2025/03/18
- * @description TODO
+ * @description
  */
 @RestController
 @RequestMapping("/api/")
 public class LoginController {
-    @Autowired
-    private AuthService authService;
+    private final AuthService authService;
+
+    public LoginController(AuthService authService) {
+        this.authService = authService;
+    }
 
     @PostMapping("/login")
     public Mono<ResponseEntity<LoginResponse>> login(@Valid @RequestBody LoginRequest loginRequest) {

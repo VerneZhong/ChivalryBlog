@@ -6,9 +6,10 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 /**
+ * AuthService 验证服务
  * @author verne.zhong
  * @date 2025/03/18
- * @description TODO
+ * @description
  */
 @Service
 public class AuthService {
