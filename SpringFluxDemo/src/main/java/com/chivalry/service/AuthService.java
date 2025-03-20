@@ -1,6 +1,7 @@
 package com.chivalry.service;
 
 import com.chivalry.model.LoginRequest;
+import com.chivalry.util.JwtUtil;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Service;
@@ -22,11 +23,7 @@ public class AuthService {
         // 简单的用户名和密码验证
         if ("admin".equals(loginRequest.getUsername()) && "123456".equals(loginRequest.getPassword())) {
             // 生成 JWT token
-            String token = Jwts.builder().subject(loginRequest.getUsername())
-                    // 1小时有效期
-                    .expiration(new Date(System.currentTimeMillis() + 3600000))
-                    .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
-                    .compact();
+            String token = JwtUtil.generateToken(loginRequest.getUsername());
             return Mono.just(token);
         } else {
             return Mono.empty();

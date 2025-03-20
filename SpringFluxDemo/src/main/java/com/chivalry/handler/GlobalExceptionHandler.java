@@ -64,6 +64,7 @@ public class GlobalExceptionHandler {
                 "系统错误.",
                 ex.getMessage()
         );
+        ex.printStackTrace();
         return Mono.just(new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR));
     }
 }
