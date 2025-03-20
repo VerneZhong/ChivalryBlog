@@ -58,7 +58,7 @@ const login = async () => {
   padding: 30px;
   background-color: #fff;
   border-radius: 10px;
-  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   font-family: 'Arial', sans-serif;
 }
 
@@ -119,13 +119,6 @@ input:focus {
 
 .login-btn:active {
   transform: translateY(1px);
-}
-
-/* 错误信息 */
-.error {
-  color: red;
-  font-size: 0.9rem;
-  margin-top: 10px;
 }
 
 /* 响应式设计 */

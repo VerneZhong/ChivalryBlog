@@ -2,6 +2,7 @@ package com.chivalry.handler;
 
 import com.chivalry.response.LoginErrorResponse;
 import jakarta.validation.ConstraintViolationException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -16,6 +17,7 @@ import reactor.core.publisher.Mono;
  * @description TODO
  */
 @RestControllerAdvice
+@Slf4j
 public class GlobalExceptionHandler {
     // 处理认证失败（例如用户名或密码错误）
     @ExceptionHandler(BadCredentialsException.class)
@@ -62,7 +64,7 @@ public class GlobalExceptionHandler {
                 "系统错误.",
                 ex.getMessage()
         );
-        ex.printStackTrace();
+        log.error("系统错误: {}", ex.getMessage());
         return Mono.just(new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR));
     }
 }

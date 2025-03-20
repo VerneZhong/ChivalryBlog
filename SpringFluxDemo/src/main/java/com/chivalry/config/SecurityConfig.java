@@ -32,7 +32,6 @@ public class SecurityConfig {
                         .pathMatchers("/api/login").permitAll()  // 允许登录请求
                         .anyExchange().authenticated()  // 其他请求需要认证
                 )
-//                .oauth2ResourceServer(oauth2 -> oauth2.jwt(withDefaults()))  // 启用 JWT 认证
                 .build();
     }
 
