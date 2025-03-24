@@ -16,7 +16,7 @@ const login = async () => {
       username: username.value,
       password: password.value
     })
-    console.log(response)
+
     // 返回数据包含一个 `token` 或 `status` 字段
     if (response.data.status === 'success') {
       toast.success("登录成功！🎉", { timeout: 2000 })
@@ -29,7 +29,6 @@ const login = async () => {
     }
   } catch (error) {
     // 处理请求错误（如网络问题、后端错误等）
-    console.log(error)
     if  (error.response.status === 401) {
       toast.error("用户名或密码错误！🎉", { timeout: 2000 })
     } else {
