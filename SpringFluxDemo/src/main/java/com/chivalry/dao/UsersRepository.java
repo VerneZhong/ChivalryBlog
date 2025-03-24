@@ -2,8 +2,7 @@ package com.chivalry.dao;
 
 import com.chivalry.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.Optional;
+import reactor.core.publisher.Mono;
 
 /**
  * @author verne.zhong
@@ -11,5 +10,5 @@ import java.util.Optional;
  * @description
  */
 public interface UsersRepository extends JpaRepository<UserEntity, Long> {
-    Optional<UserEntity> findByUsername(String username);
+    UserEntity findByUsername(String username);
 }

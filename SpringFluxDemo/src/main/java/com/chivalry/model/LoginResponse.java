@@ -16,4 +16,9 @@ public class LoginResponse {
         this.token = token;
         this.status = "success";
     }
+
+    public LoginResponse(String token, String status) {
+        this.token = token;
+        this.status = status;
+    }
 }

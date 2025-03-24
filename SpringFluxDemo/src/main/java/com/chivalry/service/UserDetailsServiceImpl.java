@@ -26,11 +26,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return usersRepository.findByUsername(username)
-                .map(userEntity -> User.withUsername(userEntity.getUsername())
-                        .password(userEntity.getPassword()) // Spring Security 会自动校验密码
-                        .authorities(Collections.emptyList()) // 如果有角色权限信息，可替换为空列表
-                        .build())
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
+//        return usersRepository.findByUsername(username)
+//                .map(userEntity -> User.withUsername(userEntity.getUsername())
+//                        .password(userEntity.getPassword()) // Spring Security 会自动校验密码
+//                        .authorities(Collections.emptyList()) // 如果有角色权限信息，可替换为空列表
+//                        .build())
+//                .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
+        return null;
     }
 }

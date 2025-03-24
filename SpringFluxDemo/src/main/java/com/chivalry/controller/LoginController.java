@@ -35,18 +35,18 @@ public class LoginController {
                 // 登录成功，返回 token
                 .map(token -> ResponseEntity.ok(new LoginResponse(token)))
                 // 登录失败，返回 bad request
-                .defaultIfEmpty(ResponseEntity.badRequest().body(new LoginResponse("Invalid credentials")))
+                .defaultIfEmpty(ResponseEntity.badRequest().body(new LoginResponse("Invalid credentials", "error")))
                 .onErrorResume(e -> {
                     // 根据不同的错误类型返回不同的响应
                     if (e instanceof BadCredentialsException) {
                         return Mono.just(ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                                .body(new LoginResponse("Invalid username or password")));
+                                .body(new LoginResponse("Invalid username or password", "error")));
                     } else if (e instanceof LockedException) {
                         return Mono.just(ResponseEntity.status(HttpStatus.FORBIDDEN)
-                                .body(new LoginResponse("Your account is locked")));
+                                .body(new LoginResponse("Your account is locked", "error")));
                     } else {
                         return Mono.just(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                                .body(new LoginResponse("An unexpected error occurred")));
+                                .body(new LoginResponse("An unexpected error occurred", "error")));
                     }
                 });
     }
