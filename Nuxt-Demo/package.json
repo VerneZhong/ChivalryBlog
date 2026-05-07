@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@vueuse/core": "^13.0.0",
-    "axios": "^1.8.3",
+    "axios": "^1.15.2",
     "nuxt": "^3.16.0",
     "parse-git-config": "^3.0.0",
     "vue": "^3.5.13",
